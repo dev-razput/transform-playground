@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transform Playground | Dev Singh</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.4s ease;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    :root {
+      --bg: #0d0d0f;
+      --card: rgba(30, 30, 36, 0.8);
+      --text: #f8fafc;
+      --accent: #6366f1;
+      --border: rgba(99, 102, 241, 0.2);
+    }
+    body.light {
+      --bg: #f8fafc;
+      --card: rgba(255, 255, 255, 0.8);
+      --text: #0f172a;
+      --accent: #6366f1;
+      --border: rgba(99, 102, 241, 0.2);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      padding: 30px;
+    }
+    nav {
+      width: 100%;
+      max-width: 1200px;
+      background: var(--card);
+      padding: 15px 30px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+    }
+    nav h2 {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .toggle {
+      padding: 5px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .hero {
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .hero p {
+      opacity: 0.7;
+    }
+    .box-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .box {
+      height: 200px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .box:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent);
+    }
+    /* Code overlay appears only on hover */
+    .code-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .box:hover .code-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .property-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      opacity: 0.7;
+    }
+    .social-links button {
+      padding: 8px 15px;
+      font-size: 14px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .social-links button:hover {
+      background: #4f46e5;
+    }
+    /* Transform hover effects (applied on hover only) */
+    .translate:hover { transform: translate(20px,20px); }
+    .rotate:hover    { transform: rotate(20deg); }
+    .scale:hover     { transform: scale(1.2); }
+    .skew:hover      { transform: skew(15deg,10deg); }
+    .matrix:hover    { transform: matrix(1, 0.5, -0.5, 1, 20, 20); }
+    .perspective:hover { transform: perspective(500px) rotateX(15deg) rotateY(15deg); }
+    .rotateX:hover   { transform: rotateX(45deg); }
+    .rotateY:hover   { transform: rotateY(45deg); }
+    .rotateZ:hover   { transform: rotateZ(45deg); }
+    .scaleX:hover    { transform: scaleX(1.5); }
+    .scaleY:hover    { transform: scaleY(1.5); }
+    .skewX:hover     { transform: skewX(30deg); }
+    .skewY:hover     { transform: skewY(30deg); }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <h2>Dev Singh</h2>
+    <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark</button>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>CSS Transform Playground</h1>
+    <p>Hover on the boxes to see all CSS Transform Properties in action</p>
+  </div>
+
+  <!-- Box Grid -->
+  <div class="box-grid">
+    <!-- translate() -->
+    <div class="box translate">
+      <div class="property-name">translate()</div>
+      <div class="code-overlay">transform: translate(20px, 20px);</div>
+    </div>
+    <!-- rotate() -->
+    <div class="box rotate">
+      <div class="property-name">rotate()</div>
+      <div class="code-overlay">transform: rotate(20deg);</div>
+    </div>
+    <!-- scale() -->
+    <div class="box scale">
+      <div class="property-name">scale()</div>
+      <div class="code-overlay">transform: scale(1.2);</div>
+    </div>
+    <!-- skew() -->
+    <div class="box skew">
+      <div class="property-name">skew()</div>
+      <div class="code-overlay">transform: skew(15deg, 10deg);</div>
+    </div>
+    <!-- matrix() -->
+    <div class="box matrix">
+      <div class="property-name">matrix()</div>
+      <div class="code-overlay">transform: matrix(1, 0.5, -0.5, 1, 20, 20);</div>
+    </div>
+    <!-- perspective() -->
+    <div class="box perspective">
+      <div class="property-name">perspective()</div>
+      <div class="code-overlay">transform: perspective(500px) rotateX(15deg) rotateY(15deg);</div>
+    </div>
+    <!-- rotateX() -->
+    <div class="box rotateX">
+      <div class="property-name">rotateX()</div>
+      <div class="code-overlay">transform: rotateX(45deg);</div>
+    </div>
+    <!-- rotateY() -->
+    <div class="box rotateY">
+      <div class="property-name">rotateY()</div>
+      <div class="code-overlay">transform: rotateY(45deg);</div>
+    </div>
+    <!-- rotateZ() -->
+    <div class="box rotateZ">
+      <div class="property-name">rotateZ()</div>
+      <div class="code-overlay">transform: rotateZ(45deg);</div>
+    </div>
+    <!-- scaleX() -->
+    <div class="box scaleX">
+      <div class="property-name">scaleX()</div>
+      <div class="code-overlay">transform: scaleX(1.5);</div>
+    </div>
+    <!-- scaleY() -->
+    <div class="box scaleY">
+      <div class="property-name">scaleY()</div>
+      <div class="code-overlay">transform: scaleY(1.5);</div>
+    </div>
+    <!-- skewX() -->
+    <div class="box skewX">
+      <div class="property-name">skewX()</div>
+      <div class="code-overlay">transform: skewX(30deg);</div>
+    </div>
+    <!-- skewY() -->
+    <div class="box skewY">
+      <div class="property-name">skewY()</div>
+      <div class="code-overlay">transform: skewY(30deg);</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Follow me:</p>
+    <div class="social-links">
+      <button onclick="window.open('https://x.com/dev_razput', '_blank')">Follow on X</button>
+      <button onclick="window.open('https://www.quora.com/profile/Dev-Singh-3753', '_blank')">Follow on Quora</button>
+      <button onclick="window.open('https://webdevjourneywithdevsingh.quora.com/', '_blank')">Visit My Space</button>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      console.log('Theme toggled!');
+    }
+  </script>
+</body>
+</html>
