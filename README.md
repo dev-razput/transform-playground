@@ -10,7 +10,7 @@ This is an interactive playground showcasing various CSS transform properties. U
 - **Responsive Design:** Works across different screen sizes.
 
 ## Screenshot
-![CSS Transform Playground]((https://github.com/dev-razput/transform-playground/blob/main/Screenshort.png))
+![CSS Transform Playground](https://github.com/dev-razput/transform-playground/blob/main/Screenshort.png?raw=true)
 
 ## Installation
 1. Clone the repository:
